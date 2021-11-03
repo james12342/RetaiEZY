@@ -1,0 +1,11 @@
+{
+  "android": {
+    "release": {
+      "keystore": "c:\\dev\\mj-release-key.keystore",
+      "storePassword": "kentxy_01",
+      "alias": "android-key",
+      "password": "kentxy_01",
+      "keystoreType": ""
+    }
+  }
+}

@@ -1,0 +1,1086 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="msapplication-tap-highlight" content="no" />
+    <meta name="viewport" content="user-scalable=yes, initial-scale=1, maximum-scale=2, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
+
+
+    <link rel="stylesheet" href="lib/jquery-mobile/css/jquery.mobile-1.4.0.min.css" />
+    <script type="text/javascript" src="lib/jquery-mobile/js/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript" src="lib/jquery-mobile/js/jquery.mobile-1.4.0.min.js"></script>
+    <script type="text/javascript" src="js/index.js"></script>
+    <script type="text/javascript" src="cordova.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/index.css" />
+
+    <script type="text/javascript">
+
+
+        var BackgroundColor_YELLOW = "YELLOW";
+        var BackgroundColor_BLUE = "LIGHTBLUE";
+        var Caculator = "";
+        var Range_Adjust = "";
+
+
+        function Cac_GM() {
+            //set input as number first
+            Caculator = "GM";
+            var number1 = document.getElementById("ItemCost1").value;
+            var number2 = document.getElementById("ItemRetail1").value;
+
+            //check if number1,number2 has $
+            if (number1.includes("$") == true) {
+                //alert("yes");
+                number1 = number1.replace("$", "");
+            }
+            else {
+                document.getElementById("ItemCost1").type = "number";
+            }
+
+            if (number2.includes("$") == true) {
+                number2 = number2.replace("$", "");
+            }
+            else {
+                document.getElementById("ItemRetail1").type = "number";
+            }
+
+            document.getElementById("ItemCost1").style.backgroundColor = BackgroundColor_YELLOW;
+            document.getElementById("ItemRetail1").style.backgroundColor = BackgroundColor_YELLOW;
+            document.getElementById("GM1").style.backgroundColor = BackgroundColor_BLUE;
+
+            console.log(number1 + " " + number2);
+            var result = parseFloat((1 - number1 / number2) * 100).toFixed(2);
+
+            //after caculation, set unput as text show $
+            document.getElementById("ItemCost1").type = "text";
+            document.getElementById("ItemRetail1").type = "text";
+            document.getElementById("GM1").type = "text";
+            document.getElementById("ItemCost1").value = "$" + number1;
+            document.getElementById("ItemRetail1").value = "$" + number2;
+            document.getElementById("GM1").value = result + "%";
+
+            ////adjust the range bar
+            //document.getElementById("Range_ItemCost1").value = number1;
+            //document.getElementById("Range_ItemRetail1").value = number2;
+            //document.getElementById("Range_GM1").value = result;
+
+            //showing the results
+            document.getElementById("L_Results").innerText = "Result:";
+            document.getElementById("L_Results_CRM").innerText = "ItemCost:$" + number1 + "\n" + "   ItemRetail:$" + number2 + "\n" + "   GM:" + result + "%";
+
+            //options
+
+
+        }
+
+        function Cac_GM2() {
+            //set input as number first
+            Caculator = "GM";
+            var number1 = document.getElementById("ItemCost3").value;
+            var number2 = document.getElementById("ItemRetail3").value;
+
+            //check if number1,number2 has $
+            if (number1.includes("$") == true) {
+                //alert("yes");
+                number1 = number1.replace("$", "");
+            }
+            else {
+                document.getElementById("ItemCost3").type = "number";
+            }
+
+            if (number2.includes("$") == true) {
+                number2 = number2.replace("$", "");
+            }
+            else {
+                document.getElementById("ItemRetail3").type = "number";
+            }
+
+            document.getElementById("ItemCost3").style.backgroundColor = BackgroundColor_YELLOW;
+            document.getElementById("ItemRetail3").style.backgroundColor = BackgroundColor_YELLOW;
+            document.getElementById("GM3").style.backgroundColor = BackgroundColor_BLUE;
+
+            console.log(number1 + " " + number2);
+            var result = parseFloat((1 - number1 / number2) * 100).toFixed(2);
+
+            //after caculation, set unput as text show $
+            document.getElementById("ItemCost3").type = "text";
+            document.getElementById("ItemRetail3").type = "text";
+            document.getElementById("GM3").type = "text";
+            document.getElementById("ItemCost3").value = "$" + number1;
+            document.getElementById("ItemRetail3").value = "$" + number2;
+            document.getElementById("GM3").value = result + "%";
+
+            ////adjust the range bar
+            //document.getElementById("Range_ItemCost1").value = number1;
+            //document.getElementById("Range_ItemRetail1").value = number2;
+            //document.getElementById("Range_GM1").value = result;
+
+            //showing the results
+            document.getElementById("L_Results").innerText = "Result:";
+            document.getElementById("L_Results_CRM").innerText = "ItemCost:$" + number1 + "\n" + "   ItemRetail:$" + number2 + "\n" + "   GM:" + result + "%";
+
+            //options
+
+
+        }
+
+        //RANGE BAR
+        function onclickRangeSelect() {
+            if (Caculator == "GM") {
+                var count = document.getElementById("rangeadjustselect").length;
+                document.getElementById("rangeadjustselect")[0].style.display = "block";
+                document.getElementById("rangeadjustselect")[3].style.display = "none";
+                document.getElementById("rangeadjustselect")[1].style.display = "block";
+                document.getElementById("rangeadjustselect")[2].style.display = "block";
+            }
+            if (Caculator == "ItemCost") {
+                //var count = document.getelementbyid("rangeadjustselect").length;
+                document.getElementById("rangeadjustselect")[0].style.display = "block";
+                document.getElementById("rangeadjustselect")[1].style.display = "none";
+                document.getElementById("rangeadjustselect")[2].style.display = "block";
+                document.getElementById("rangeadjustselect")[3].style.display = "block";
+            }
+            if (Caculator == "ItemRetail") {
+                // var count = document.getelementbyid("rangeadjustselect").length;
+                document.getElementById("rangeadjustselect")[0].style.display = "block";
+                document.getElementById("rangeadjustselect")[2].style.display = "none";
+                document.getElementById("rangeadjustselect")[1].style.display = "block";
+                document.getElementById("rangeadjustselect")[3].style.display = "block";
+            }
+        }
+        function onrangeadjustselect(e) {
+            var caName = e.target.options[e.target.selectedIndex].value;
+            if (caName == "ItemCost") {
+                Caculator = "ItemCost";
+                var number1 = document.getElementById("ItemCost1").value;
+                if (number1.includes("$")) {
+                    number1 = number1.substring(1, number1.length);
+                }
+
+                document.getElementById("RNG_CRM_Cal").max = number1 * 1.5;
+                document.getElementById("RNG_CRM_Cal").value = number1;
+
+                var count = document.getelementbyid("rangeadjustselect").length;
+                document.getelementbyid("rangeadjustselect")[0].style.display = "block";
+                document.getelementbyid("rangeadjustselect")[1].style.display = "none";
+                document.getelementbyid("rangeadjustselect")[2].style.display = "block";
+                document.getelementbyid("rangeadjustselect")[3].style.display = "block";
+
+
+            }
+            if (caName == "ItemRetail") {
+                Caculator = "ItemRetail";
+                var number1 = document.getElementById("ItemRetail1").value;
+                // var number1 = document.getElementById("ItemCost1").value;
+                if (number1.includes("$")) {
+                    number1 = number1.substring(1, number1.length);
+                }
+                document.getElementById("RNG_CRM_Cal").max = number1 * 1.5;
+                document.getElementById("RNG_CRM_Cal").value = number1;
+
+                var count = document.getelementbyid("rangeadjustselect").length;
+                document.getelementbyid("rangeadjustselect")[0].style.display = "block";
+                document.getelementbyid("rangeadjustselect")[2].style.display = "none";
+                document.getelementbyid("rangeadjustselect")[1].style.display = "block";
+                document.getelementbyid("rangeadjustselect")[3].style.display = "block";
+
+
+            }
+            if (caName == "GM") {
+                Caculator = "GM";
+                var number1 = document.getElementById("GM1").value;
+
+                if (number1.includes("%")) {
+                    number1 = number1.substring(0, number1.length - 1);
+                }
+                document.getElementById("RNG_CRM_Cal").max = number1 * 1.5;
+                document.getElementById("RNG_CRM_Cal").value = number1;
+
+                var count = document.getElementById("rangeadjustselect").length;
+                document.getElementById("rangeadjustselect")[0].style.display = "block";
+                document.getElementById("rangeadjustselect")[3].style.display = "none";
+                document.getElementById("rangeadjustselect")[1].style.display = "block";
+                document.getElementById("rangeadjustselect")[2].style.display = "block";
+
+            }
+
+        }
+        function Cac_GM_RG_Cal() {
+            if (Caculator == "ItemCost") {
+                Cac_GM_RG_ItemCost1();
+            }
+
+            if (Caculator == "ItemDetail") {
+                Cac_GM_RG_ItemRetail();
+            }
+        }
+        function Cac_GM_RG_ItemCost1() {
+            var number1 = document.getElementById("ItemCost1").value;
+
+            document.getElementById("ItemCost1").value = document.getElementById("RNG_CRM_Cal").value;
+            var number1 = document.getElementById("ItemCost1").value;
+            if (Caculator == "ItemRetail") {
+                //alert("ItemRetail");
+            }
+            else {
+                //alert("GM");
+            }
+            var number2 = document.getElementById("ItemRetail1").value;
+
+            //check if number1,number2 has $
+            if (number1.includes("$") == true) {
+                //alert("yes");
+                number1 = number1.replace("$", "");
+            }
+            else {
+                document.getElementById("ItemCost1").type = "number";
+            }
+
+            if (number2.includes("$") == true) {
+                number2 = number2.replace("$", "");
+            }
+            else {
+                document.getElementById("ItemRetail1").type = "number";
+            }
+
+            //document.getElementById("ItemCost1").style.backgroundColor = BackgroundColor_YELLOW;
+            //document.getElementById("ItemRetail1").style.backgroundColor = BackgroundColor_YELLOW;
+            //document.getElementById("GM1").style.backgroundColor = BackgroundColor_BLUE;
+
+            console.log(number1 + " " + number2);
+            var result = parseFloat((1 - number1 / number2) * 100).toFixed(2);
+
+            //after caculation, set unput as text show $
+            document.getElementById("ItemCost1").type = "text";
+            document.getElementById("ItemRetail1").type = "text";
+            document.getElementById("GM1").type = "text";
+            document.getElementById("ItemCost1").value = "$" + number1;
+            document.getElementById("ItemRetail1").value = "$" + number2;
+            document.getElementById("GM1").value = result + "%";
+
+            //adjust the range bar
+            //document.getElementById("Range_ItemCost1").value = number1;
+            // document.getElementById("Range_ItemRetail1").value = number2;
+            // document.getElementById("Range_GM1").value = result;
+
+            //showing the results
+            document.getElementById("L_Results").innerText = "Result:";
+            document.getElementById("L_Results_CRM").innerText = "ItemCost:$" + number1 + "   ItemRetail:$" + number2 + "   GM:" + result + "%";
+
+        }
+
+        function Cac_ItemRetail() {
+            Caculator = "ItemRetail";
+            var number1 = document.getElementById("ItemCost1").value;
+            var number2 = document.getElementById("GM1").value;
+            //check if number1,number2 has $
+            if (number1.includes("$") == true) {
+                //alert("yes");
+                number1 = number1.replace("$", "");
+            }
+            else {
+                document.getElementById("ItemCost1").type = "number";
+            }
+
+            if (number2.includes("%") == true) {
+                number2 = number2.replace("%", "");
+            }
+            else {
+                document.getElementById("GM1").type = "number";
+            }
+
+            document.getElementById("ItemCost1").style.backgroundColor = BackgroundColor_YELLOW;
+            document.getElementById("GM1").style.backgroundColor = BackgroundColor_YELLOW;
+            document.getElementById("ItemRetail1").style.backgroundColor = BackgroundColor_BLUE;
+
+            var b = parseFloat(number1 / (1 - number2 / 100)).toFixed(3);
+            var result = b.substring(0, b.toString().length - 1);
+
+            //document.getElementById("ItemRetail1").value = result;
+
+            //after caculation, set unput as text show $
+            document.getElementById("ItemCost1").type = "text";
+            document.getElementById("ItemRetail1").type = "text";
+            document.getElementById("GM1").type = "text";
+            document.getElementById("ItemCost1").value = "$" + number1;
+            document.getElementById("ItemRetail1").value = "$" + result;
+            document.getElementById("GM1").value = number2 + "%";
+            //adjust the range bar
+            //document.getElementById("Range_ItemCost1").value = number1;
+            //document.getElementById("Range_ItemRetail1").value = number2;
+            //document.getElementById("Range_GM1").value = result;
+
+            //showing the results
+            document.getElementById("L_Results").innerText = "Result:";
+            document.getElementById("L_Results_CRM").innerText = "ItemCost:$" + number1 + "\n" + "   ItemRetail:$" + result + "\n" + "   GM:" + number2 + "%";
+        }
+
+        function Cac_ItemRetail2() {
+            Caculator = "ItemRetail";
+            var number1 = document.getElementById("ItemCost2").value;
+            var number2 = document.getElementById("GM2").value;
+            //check if number1,number2 has $
+            if (number1.includes("$") == true) {
+                //alert("yes");
+                number1 = number1.replace("$", "");
+            }
+            else {
+                document.getElementById("ItemCost2").type = "number";
+            }
+
+            if (number2.includes("%") == true) {
+                number2 = number2.replace("%", "");
+            }
+            else {
+                document.getElementById("GM1").type = "number";
+            }
+
+            document.getElementById("ItemCost2").style.backgroundColor = BackgroundColor_YELLOW;
+            document.getElementById("GM2").style.backgroundColor = BackgroundColor_YELLOW;
+            document.getElementById("ItemRetail2").style.backgroundColor = BackgroundColor_BLUE;
+
+            var b = parseFloat(number1 / (1 - number2 / 100)).toFixed(3);
+            var result = b.substring(0, b.toString().length - 1);
+
+            //document.getElementById("ItemRetail1").value = result;
+
+            //after caculation, set unput as text show $
+            document.getElementById("ItemCost2").type = "text";
+            document.getElementById("ItemRetail2").type = "text";
+            document.getElementById("GM2").type = "text";
+            document.getElementById("ItemCost2").value = "$" + number1;
+            document.getElementById("ItemRetail2").value = "$" + result;
+            document.getElementById("GM2").value = number2 + "%";
+            //adjust the range bar
+            //document.getElementById("Range_ItemCost1").value = number1;
+            //document.getElementById("Range_ItemRetail1").value = number2;
+            //document.getElementById("Range_GM1").value = result;
+
+            //showing the results
+            document.getElementById("L_Results").innerText = "Result:";
+            document.getElementById("L_Results_CRM").innerText = "ItemCost:$" + number1 + "\n" + "   ItemRetail:$" + result + "\n" + "   GM:" + number2 + "%";
+        }
+
+        //RANGE BAR
+        function Cac_GM_RG_ItemRetail() {
+            //set input as number first
+            document.getElementById("ItemRetail1").value = document.getElementById("Range_ItemRetail1").value;
+            var number1 = document.getElementById("ItemRetail1").value;
+            var number2 = document.getElementById("GM1").value;
+            //check if number1,number2 has $
+            if (number1.includes("$") == true) {
+                //alert("yes");
+                number1 = number1.replace("$", "");
+            }
+            else {
+                document.getElementById("ItemCost1").type = "number";
+            }
+
+            if (number2.includes("%") == true) {
+                number2 = number2.replace("%", "");
+            }
+            else {
+                document.getElementById("GM1").type = "number";
+            }
+
+            //document.getElementById("ItemCost1").style.backgroundColor = BackgroundColor_YELLOW;
+            //document.getElementById("GM1").style.backgroundColor = BackgroundColor_YELLOW;
+            //document.getElementById("ItemRetail1").style.backgroundColor = BackgroundColor_BLUE;
+
+            var b = parseFloat(number1 / (1 - number2 / 100)).toFixed(3);
+            var result = b.substring(0, b.toString().length - 1);
+
+            //document.getElementById("ItemRetail1").value = result;
+
+            //after caculation, set unput as text show $
+            document.getElementById("ItemCost1").type = "text";
+            document.getElementById("ItemRetail1").type = "text";
+            document.getElementById("GM1").type = "text";
+            document.getElementById("ItemCost1").value = "$" + number1;
+            document.getElementById("ItemRetail1").value = "$" + result;
+            document.getElementById("GM1").value = number2 + "%";
+            //adjust the range bar
+            document.getElementById("Range_ItemCost1").value = number1;
+            document.getElementById("Range_ItemRetail1").value = number2;
+            document.getElementById("Range_GM1").value = result;
+
+            //showing the results
+            document.getElementById("L_Results").innerText = "Result:";
+            document.getElementById("L_Results_CRM").innerText = "ItemCost:$" + number1 + "\n" + "   ItemRetail:$" + number2 + "\n" + "   GM:" + result + "%";
+        }
+        function Cac_ItemCost() {
+            Caculator = "ItemCost";
+            var number1 = document.getElementById("ItemRetail1").value;
+            var number2 = document.getElementById("GM1").value;
+            //check if number1,number2 has $
+            if (number1.includes("$") == true) {
+                //alert("yes");
+                number1 = number1.replace("$", "");
+            }
+            else {
+                document.getElementById("ItemRetail1").type = "number";
+            }
+
+            if (number2.includes("%") == true) {
+                number2 = number2.replace("%", "");
+            }
+            else {
+                document.getElementById("GM1").type = "number";
+            }
+
+            document.getElementById("ItemRetail1").style.backgroundColor = BackgroundColor_YELLOW;
+            document.getElementById("GM1").style.backgroundColor = BackgroundColor_YELLOW;
+            document.getElementById("ItemCost1").style.backgroundColor = BackgroundColor_BLUE;
+
+            //after caculation, set unput as text show $
+            document.getElementById("ItemCost1").type = "text";
+            document.getElementById("ItemRetail1").type = "text";
+            document.getElementById("GM1").type = "text";
+            var result = parseFloat((number1 * (1 - number2 / 100))).toFixed(2);
+            document.getElementById("ItemCost1").value = "$" + result;
+            document.getElementById("ItemRetail1").value = "$" + number1;
+            document.getElementById("GM1").value = number2 + "%";
+
+            //showing the results
+            document.getElementById("L_Results").innerText = "Result:";
+            document.getElementById("L_Results_CRM").innerText = "ItemCost:$" + result + "\n" + "   ItemRetail:$" + number1 + "\n" + "   GM:" + number2 + "%";
+
+            //(number1 * (1 - number2 / 100)).tos;
+        }
+
+        function Cac_ProductReturn() {
+
+            document.getElementById("SalesAtCost").style.backgroundColor = BackgroundColor_YELLOW;
+            document.getElementById("AvgInvCost").style.backgroundColor = BackgroundColor_YELLOW;
+            document.getElementById("ProductReturn").style.backgroundColor = BackgroundColor_BLUE;
+            var number1 = document.getElementById("SalesAtCost").value;
+            var number2 = document.getElementById("AvgInvCost").value;
+
+            //check if number1,number2 has $
+            if (number1.includes("$") == true) {
+                //alert("yes");
+                number1 = number1.replace("$", "");
+            }
+            else {
+                document.getElementById("SalesAtCost").type = "number";
+            }
+
+            if (number2.includes("$") == true) {
+                number2 = number2.replace("$", "");
+            }
+            else {
+                document.getElementById("AvgInvCost").type = "number";
+            }
+
+            var b = parseFloat(number1 / number2).toFixed(3);
+            var result = b.substring(0, b.toString().length - 1);
+            document.getElementById("ProductReturn").value = result;
+
+            //after caculation, set unput as text show $
+            document.getElementById("SalesAtCost").type = "text";
+            document.getElementById("AvgInvCost").type = "text";
+            document.getElementById("ProductReturn").type = "text";
+            document.getElementById("SalesAtCost").value = "$" + number1;
+            document.getElementById("AvgInvCost").value = "$" + number2;
+            document.getElementById("ProductReturn").value = result;
+
+            //showing the results
+            //document.getElementById("L_ResultsPDR").innerText = "Result:";
+            //document.getElementById("L_Results_PDR").innerText = "Sales At Cost:$" + number1 + "\n" + "   Avgerage Inventory Cost:$" + number2 + "\n" + "   Product Turn:" + result ;
+        }
+
+        function Cac_GMROI() {
+
+            document.getElementById("GrossMargin").style.backgroundColor = BackgroundColor_YELLOW;
+            document.getElementById("AvgInvCost1").style.backgroundColor = BackgroundColor_YELLOW;
+            document.getElementById("GMROI").style.backgroundColor = BackgroundColor_BLUE;
+            var number1 = document.getElementById("GrossMargin").value;
+            var number2 = document.getElementById("AvgInvCost1").value;
+            //check if number1,number2 has $
+            if (number1.includes("$") == true) {
+                //alert("yes");
+                number1 = number1.replace("$", "");
+            }
+            else {
+                document.getElementById("GrossMargin").type = "number";
+            }
+
+            if (number2.includes("$") == true) {
+                number2 = number2.replace("$", "");
+            }
+            else {
+                document.getElementById("AvgInvCost1").type = "number";
+            }
+            var b = parseFloat(number1 / number2).toFixed(3);
+            var result = b.substring(0, b.toString().length - 1);
+            document.getElementById("GMROI").value = result;
+
+            //after caculation, set unput as text show $
+            document.getElementById("GrossMargin").type = "text";
+            document.getElementById("AvgInvCost1").type = "text";
+            document.getElementById("GMROI").type = "text";
+            document.getElementById("GrossMargin").value = "$" + number1;
+            document.getElementById("AvgInvCost1").value = "$" + number2;
+            document.getElementById("GMROI").value = result;
+
+            //showing the results
+            //document.getElementById("L_ResultsGMROI").innerText = "Result:";
+            //document.getElementById("L_Results_GMROI").innerText = "Gross Margin:$" + number1 + "\n" + "   Avgerage Inventory Cost:$" + number2 + "\n" + "   GMROI:" + result;
+        }
+
+        function Cac_SalesPerLinearFoot() {
+
+            document.getElementById("TotalSales").style.backgroundColor = BackgroundColor_YELLOW;
+            document.getElementById("LinearFeet").style.backgroundColor = BackgroundColor_YELLOW;
+            document.getElementById("SalesPerLinearFoot").style.backgroundColor = BackgroundColor_BLUE;
+            var number1 = document.getElementById("TotalSales").value;
+            var number2 = document.getElementById("LinearFeet").value;
+            if (number1.includes("$") == true) {
+                //alert("yes");
+                number1 = number1.replace("$", "");
+            }
+            else {
+                document.getElementById("TotalSales").type = "number";
+            }
+
+            if (number2.includes("$") == true) {
+                number2 = number2.replace("$", "");
+            }
+            else {
+                document.getElementById("LinearFeet").type = "number";
+            }
+            var b = parseFloat(number1 / number2).toFixed(3);
+            var result = b.substring(0, b.toString().length - 1);
+            document.getElementById("SalesPerLinearFoot").value = "$" + result;
+
+
+            //after caculation, set unput as text show $
+            document.getElementById("TotalSales").type = "text";
+            document.getElementById("LinearFeet").type = "text";
+            document.getElementById("SalesPerLinearFoot").type = "text";
+            document.getElementById("TotalSales").value = "$" + number1;
+            document.getElementById("LinearFeet").value = number2;
+            document.getElementById("SalesPerLinearFoot").value = "$" + result;
+
+            //showing the results
+            //document.getElementById("L_ResultsSPLF").innerText = "Result:";
+            //document.getElementById("L_Results_SPLF").innerText = "Total Sales:$" + number1 + "\n" + "   Linear Feet:" + number2 + "\n" + "   Sales Per Linear Foot:" + "$" + result;
+
+        }
+
+        function onDeviceReady() {
+            console.log("Device Ready!");
+        }
+
+        function handleBackButton() {
+
+            var userAgent = navigator.userAgent || navigator.vendor || window.opera;
+            if (userAgent.match(/iPad/i) || userAgent.match(/iPhone/i) || userAgent.match(/iPod/i)) {
+                // IOS DEVICE
+                history.go(-1);
+            } else if (userAgent.match(/Android/i)) {
+                // ANDROID DEVICE
+                navigator.app.backHistory();
+            } else {
+                // EVERY OTHER DEVICE
+                history.go(-1);
+                //index.html
+            }
+            window.location.reload(true);
+            window.location.reload(true);
+        }
+
+        //##########onclick the input must enter number##############
+        function OnClickItemCost() {
+            document.getElementById("ItemCost1").type = "number";
+            document.getElementById("ItemCost1").style.backgroundColor = BackgroundColor_YELLOW;
+            //var number1 = document.getElementById("ItemCost1").value;
+            //document.getElementById("Range_ItemCost1").max = number1*1.5;
+
+        }
+        function OnClickItemCost2() {
+            document.getElementById("ItemCost2").type = "number";
+            document.getElementById("ItemCost2").style.backgroundColor = BackgroundColor_YELLOW;
+            //var number1 = document.getElementById("ItemCost1").value;
+            //document.getElementById("Range_ItemCost1").max = number1*1.5;
+
+        }
+        function OnClickItemCost3() {
+            document.getElementById("ItemCost3").type = "number";
+            document.getElementById("ItemCost3").style.backgroundColor = BackgroundColor_YELLOW;
+            //var number1 = document.getElementById("ItemCost1").value;
+            //document.getElementById("Range_ItemCost1").max = number1*1.5;
+
+        }
+        function OnClickItemRetail1() {
+            document.getElementById("ItemRetail1").type = "number";
+            document.getElementById("ItemRetail1").style.backgroundColor = BackgroundColor_YELLOW;
+        }
+        function OnClickItemRetail2() {
+            document.getElementById("ItemRetail2").type = "number";
+            document.getElementById("ItemRetail2").style.backgroundColor = BackgroundColor_YELLOW;
+        }
+        function OnClickItemRetail3() {
+            document.getElementById("ItemRetail3").type = "number";
+            document.getElementById("ItemRetail3").style.backgroundColor = BackgroundColor_YELLOW;
+        }
+        function OnClickGM1() {
+            document.getElementById("GM1").type = "number";
+            document.getElementById("GM1").style.backgroundColor = BackgroundColor_YELLOW;
+        }
+        function OnClickGM2() {
+            document.getElementById("GM2").type = "number";
+            document.getElementById("GM2").style.backgroundColor = BackgroundColor_YELLOW;
+        }
+        function OnClickGM3() {
+            document.getElementById("GM3").type = "number";
+            document.getElementById("GM3").style.backgroundColor = BackgroundColor_YELLOW;
+        }
+        function OnclickSalesAtCost() {
+            document.getElementById("SalesAtCost").type = "number";
+            document.getElementById("SalesAtCost").style.backgroundColor = BackgroundColor_YELLOW;
+        }
+
+        function OnclickAvgInvCost() {
+            document.getElementById("AvgInvCost").type = "number";
+            document.getElementById("AvgInvCost").style.backgroundColor = BackgroundColor_YELLOW;
+        }
+
+        function OnclickProductReturn() {
+            document.getElementById("ProductReturn").type = "number";
+            document.getElementById("ProductReturn").style.backgroundColor = BackgroundColor_BLUE;
+        }
+
+        function OnClickGrossMargin() {
+            document.getElementById("GrossMargin").type = "number";
+            document.getElementById("GrossMargin").style.backgroundColor = BackgroundColor_YELLOW;
+        }
+
+        function OnClickAvgInvCost1() {
+            document.getElementById("AvgInvCost1").type = "number";
+            document.getElementById("AvgInvCost1").style.backgroundColor = BackgroundColor_YELLOW;
+        }
+
+        function OnClickGMROI() {
+            document.getElementById("GMROI").type = "number";
+            document.getElementById("GMROI").style.backgroundColor = BackgroundColor_YELLOW;
+        }
+
+        function OnClickTotalSales() {
+            document.getElementById("TotalSales").type = "number";
+            document.getElementById("TotalSales").style.backgroundColor = BackgroundColor_YELLOW;
+        }
+
+        function OnClickLinearFeet() {
+            document.getElementById("LinearFeet").type = "number";
+            document.getElementById("LinearFeet").style.backgroundColor = BackgroundColor_YELLOW;
+        }
+
+
+        //###########
+
+        //###################onchange input ############################
+
+        function OnChangeItemCost() {
+            //document.getElementById("ItemCost1").type = "number";
+            var number1 = document.getElementById("ItemCost1").value;
+            document.getElementById("RNG_CRM_Cal").max = number1 * 1.5;
+            document.getElementById("RNG_CRM_Cal").value = number1;
+
+        }
+
+
+        //##############################################################
+    </script>
+
+    <title>Retail Buyer Caculator Helper by Majestic Pet Production</title>
+</head>
+<body>
+    <div data-role="page" id="Home">
+        <div data-role="header" data-position="fixed">
+            <h1>Retail Ezy Calc</h1>
+        </div>
+
+        <!--<div role="main" class="ui-content" id="home-content">-->
+        <div role="main" id="home-content">
+            <table width="100%">
+                <tr>
+                    <td width="50%" style="text-align:center">
+                        <a href="#GM_Calculator" data-transition="slide" style="text-decoration:none;color:#000000">
+                            <img src="img/Calculator3.png" width="100px" height="100px" /><br />
+                            GM Calculator
+                        </a>
+                    </td>
+
+                   
+
+                    <td width="50%" style="text-align:center">
+                        <a href="#Retail_Calculator" data-transition="slide" style="text-decoration:none;color:#000000">
+                            <img src="img/Calculator4.png" width="100px" height="100px" /><br />
+                            Retail Calculator
+                        </a>
+                    </td>
+                </tr>
+                <br>
+                <br>
+                <tr>
+                    <td width="50%" style="text-align:center">
+                        <a href="#CRM_Calculator" data-transition="slide" style="text-decoration:none;color:#000000">
+                            <img src="img/Calculator.png" width="100px" height="100px" /><br />
+                            Cost Calculator
+                        </a>
+                    </td>
+
+                    <td width="50%" style="text-align:center">
+                        <a href="#PDR_Calculator" data-transition="slide" style="text-decoration:none;color:#000000">
+                            <img src="img/Calculator1.png" width="100px" height="100px" /><br />
+                            Product Turn Calculator
+                        </a>
+
+                    </td>
+
+                </tr>
+                <br>
+                <br>
+                <tr>
+                    <td width="50%" style="text-align:center">
+                        <a href="#GMROI_Calculator" data-transition="slide" style="text-decoration:none;color:#000000">
+                            <img src="img/Calculator2.png" width="100px" height="100px" /><br />
+                            GMROI<br /> Calculator
+                        </a>
+                    </td>
+
+                    <td width="50%" style="text-align:center">
+                        <a href="#Sales_Per_Linear_Foot" data-transition="slide" style="text-decoration:none;color:#000000">
+                            <img src="img/Calculator5.png" width="100px" height="100px" /><br />
+                            Sales Per Linear Foot Calculator
+                        </a>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+    <div data-role="page" id="About">
+        <div data-role="header" data-position="fixed">
+            <h1>About Calculator</h1>
+            <a href=" index.html" onclick=" self.location=document.referrer">Back</a>
+        </div>
+
+        <div role="main" class="ui-content" id="home-content">
+
+            <h4>
+                This calculator is designed by MajesticPet Production<br /><br />
+                <address>
+                    james@realpacus.com<br />
+                </address>
+            </h4>
+        </div>
+    </div>
+
+    <div data-role="page" id="CRM_Calculator">
+        <div data-role="header" data-position="fixed">
+            <h1>Retail EZY CALC</h1>
+            <!--<a href="index.html" data-transition="slide" data-direction="reverse" data-icon="arrow-l" class="ui-btn-left">Back</a>-->
+            <a href=" index.html" onclick=" self.location=document.referrer">Back</a>
+        </div>
+
+        <div role="main" class="ui-content" id="home-content">
+
+            <div>
+                <label for="ItemRetail1">Item Retail $</label>
+            </div>
+            <div>
+                <input type="number" style="background-color:yellow" id="ItemRetail1" placeholder="Enter Item Retail $"   onclick="OnClickItemRetail1()"/>
+            </div>
+
+            <div>
+                <label for="GM1">GM % </label>
+            </div>
+            <div>
+                <input type="number" style="background-color:yellow" id="GM1" placeholder="Enter GM %"  onchange="Cac_ItemCost()" onclick="OnClickGM1()" />
+            </div>
+
+            <div>
+                <label for="ItemCost1">Item Cost $</label>
+            </div>
+            <div>
+                <input type="number" style="background-color:lightblue" id="ItemCost1" placeholder="Result Item Cost" />
+            </div>
+
+
+
+            <!--<button style="padding: 8px 30px;" id="Cac_GM" onclick="Cac_GM()"> Caculate GM </button>
+            <button style="padding: 8px 30px;" id="Cac_ItemRetail" onclick="Cac_ItemRetail()"> Caculate ItemRetail </button>-->
+            <button style="padding: 8px 30px;" id="Cac_ItemCost" onclick="Cac_ItemCost()"> Calculate Item Cost </button>
+            <!--<label id="R_Results_CRM" for="R_Results_CRM"></label>
+            <label id="R_ItemCost1r" for="R_ItemCost1"></label>
+            <label id="R_ItemRetail1" for="R_ItemRetail1"></label>
+            <label id="R_GM1" for="R_GM1"></label>-->
+
+            <!--range bar-->
+            <!--<p>Range Caculator</p>
+    <select id="rangeadjustselect" onchange="onrangeadjustselect(event)" onclick="onclickRangeSelect()">
+        <option value="ADJ">Range Adjust</option>
+        <option value="ItemCost">Adjust ItemCost</option>
+        <option value="ItemRetail">Adjust ItemRetail</option>
+        <option value="GM">Adjust GM</option>
+    </select>-->
+            <!--<select id="rangefixselect" style="padding: 5px 30px;">
+        <option value="ADJ">Range Adjust</option>
+        <option value="ItemCost">Fixed ItemCost</option>
+        <option value="ItemRetail">Fixed ItemRetail</option>
+        <option value="GM">Fixed GM</option>
+    </select>-->
+
+            <div class="slidecontainer">
+
+                <!--<label style="font-size:small" id="Range_calName">Range:</label>
+
+        <input type="range" min="1" max="99999" value="50000" class="slider" id="RNG_CRM_Cal" onchange="Cac_GM_RG_Cal()">-->
+                <!--<p>Item Retail Range $:</p>
+
+        <input type="range" min="1" max="999999" value="500000" class="slider" id="Range_ItemRetail1" onchange="Cac_GM_RG_ItemRetail()">
+        <p>GM Range %:</p>
+        <input type="range" min="1" max="100" value="50" class="slider" id="Range_GM1">-->
+            </div>
+            <!--showing the result-->
+            <!--<div>
+                <label style="font-size:small" id="L_Results"></label>
+                <label style="font-size:small" id="L_Results_CRM"></label>
+
+            </div>-->
+
+        </div>
+    </div>
+
+    <div data-role="page" id="Retail_Calculator">
+        <div data-role="header" data-position="fixed">
+            <h1>Retail EZY CALC</h1>
+            <!--<a href="index.html" data-transition="slide" data-direction="reverse" data-icon="arrow-l" class="ui-btn-left">Back</a>-->
+            <a href=" index.html" onclick=" self.location=document.referrer">Back</a>
+        </div>
+
+        <div role="main" class="ui-content" id="home-content">
+
+
+            <div>
+                <label for="ItemCost2">Item Cost $</label>
+            </div>
+            <div>
+                <input type="number" style="background-color:yellow" id="ItemCost2" placeholder="Enter Item Cost $"  onclick="OnClickItemCost2()" />
+            </div>
+
+
+            <div>
+                <label for="GM1">GM % </label>
+            </div>
+            <div>
+                <input type="number" style="background-color:yellow" id="GM2" placeholder="Enter GM %" onchange="Cac_ItemRetail2()" onclick="OnClickGM2()"  />
+            </div>
+
+            <div>
+                <label for="ItemRetail1">Item Retail $</label>
+            </div>
+            <div>
+                <input type="number" style="background-color:lightblue" id="ItemRetail2" placeholder="Result Item Retail" onclick="OnClickItemRetail2()" />
+            </div>
+
+
+
+
+            <!--<button style="padding: 8px 30px;" id="Cac_GM" onclick="Cac_GM()"> Caculate GM </button>-->
+            <button style="padding: 8px 30px;" id="Cac_ItemRetail" onclick="Cac_ItemRetail2()"> Calculate Item Retail </button>
+            <!--<button style="padding: 8px 30px;" id="Cac_ItemCost" onclick="Cac_ItemCost()"> Caculate ItemCost </button>-->
+            <label id="R_Results_CRM" for="R_Results_CRM"></label>
+            <label id="R_ItemCost1r" for="R_ItemCost1"></label>
+            <label id="R_ItemRetail1" for="R_ItemRetail1"></label>
+            <label id="R_GM1" for="R_GM1"></label>
+
+            <!--range bar-->
+            <!--<p>Range Caculator</p>
+            <select id="rangeadjustselect" onchange="onrangeadjustselect(event)" onclick="onclickRangeSelect()">
+                <option value="ADJ">Range Adjust</option>
+                <option value="ItemCost">Adjust ItemCost</option>
+                <option value="ItemRetail">Adjust ItemRetail</option>
+                <option value="GM">Adjust GM</option>
+            </select>-->
+            <!--<select id="rangefixselect" style="padding: 5px 30px;">
+                <option value="ADJ">Range Adjust</option>
+                <option value="ItemCost">Fixed ItemCost</option>
+                <option value="ItemRetail">Fixed ItemRetail</option>
+                <option value="GM">Fixed GM</option>
+            </select>-->
+
+            <div class="slidecontainer">
+
+                <!--<label style="font-size:small" id="Range_calName">Range:</label>
+
+                <input type="range" min="1" max="99999" value="50000" class="slider" id="RNG_CRM_Cal" onchange="Cac_GM_RG_Cal()">-->
+                <!--<p>Item Retail Range $:</p>
+
+                <input type="range" min="1" max="999999" value="500000" class="slider" id="Range_ItemRetail1" onchange="Cac_GM_RG_ItemRetail()">
+                <p>GM Range %:</p>
+                <input type="range" min="1" max="100" value="50" class="slider" id="Range_GM1">-->
+            </div>
+            <!--showing the result-->
+            <!--<div>
+                <label style="font-size:small" id="L_Results"></label>
+                <label style="font-size:small" id="L_Results_CRM"></label>
+
+            </div>-->
+
+        </div>
+    </div>
+
+    <div data-role="page" id="GM_Calculator">
+        <div data-role="header" data-position="fixed">
+            <h1>Retail EZY CALC</h1>
+            <!--<a href="index.html" data-transition="slide" data-direction="reverse" data-icon="arrow-l" class="ui-btn-left">Back</a>-->
+            <a href=" index.html" onclick=" self.location=document.referrer">Back</a>
+        </div>
+
+        <div role="main" class="ui-content" id="home-content">
+
+
+            <div>
+                <label for="ItemCost3">Item Cost $</label>
+            </div>
+            <div>
+                <input type="number" style="background-color:yellow" id="ItemCost3" placeholder="Enter Item Cost $"  onclick="OnClickItemCost3()"/>
+            </div>
+
+            <div>
+                <label for="ItemRetail1">Item Retail $</label>
+            </div>
+            <div>
+                <input type="number" style="background-color:yellow" id="ItemRetail3" placeholder="Enter Item Retail $" onchange="Cac_GM2()" onclick="OnClickItemRetail3()" />
+            </div>
+
+            <div>
+                <label for="GM1">GM % </label>
+            </div>
+            <div>
+                <input type="number" style="background-color:lightblue" id="GM3" placeholder="Result GM %" />
+            </div>
+
+
+
+            <button style="padding: 8px 30px;" id="Cac_GM" onclick="Cac_GM2()"> Calculate GM % </button>
+           
+          
+
+            <!--range bar-->
+            <!--<p>Range Caculator</p>
+    <select id="rangeadjustselect" onchange="onrangeadjustselect(event)" onclick="onclickRangeSelect()">
+        <option value="ADJ">Range Adjust</option>
+        <option value="ItemCost">Adjust ItemCost</option>
+        <option value="ItemRetail">Adjust ItemRetail</option>
+        <option value="GM">Adjust GM</option>
+    </select>-->
+            <!--<select id="rangefixselect" style="padding: 5px 30px;">
+        <option value="ADJ">Range Adjust</option>
+        <option value="ItemCost">Fixed ItemCost</option>
+        <option value="ItemRetail">Fixed ItemRetail</option>
+        <option value="GM">Fixed GM</option>
+    </select>-->
+
+            <div class="slidecontainer">
+
+                <!--<label style="font-size:small" id="Range_calName">Range:</label>
+
+        <input type="range" min="1" max="99999" value="50000" class="slider" id="RNG_CRM_Cal" onchange="Cac_GM_RG_Cal()">-->
+                <!--<p>Item Retail Range $:</p>
+
+        <input type="range" min="1" max="999999" value="500000" class="slider" id="Range_ItemRetail1" onchange="Cac_GM_RG_ItemRetail()">
+        <p>GM Range %:</p>
+        <input type="range" min="1" max="100" value="50" class="slider" id="Range_GM1">-->
+            </div>
+            <!--showing the result-->
+            <!--<div>
+                <label style="font-size:small" id="L_Results"></label>
+                <label style="font-size:small" id="L_Results_CRM"></label>
+
+            </div>-->
+
+        </div>
+    </div>
+
+    <div data-role="page" id="PDR_Calculator">
+        <div data-role="header" data-position="fixed">
+            <h1>Retail EZY CALC</h1>
+            <!--<button id="backbutton" onclick="handleBackButton()">Back</button>-->
+
+            <a href="index.html" onclick="self.location=document.referrer">Back</a>
+        </div>
+
+        <div role="main" class="ui-content" id="home-content">
+            <label for="SalesAtCost">Sales At Cost $</label><input type="number" id="SalesAtCost" placeholder="Enter Sales At Cost $" onclick="OnclickSalesAtCost()" style="background-color:yellow" />
+
+            <label for="AvgInvCost">Average Inventory Cost $</label><input type="number" id="AvgInvCost" placeholder="Enter Average Inventory Cost $" onclick="OnclickAvgInvCost()" style="background-color:yellow" onchange="Cac_ProductReturn()" />
+
+            <label for="Product Turn">Product Turn </label><input type="text" id="ProductReturn" placeholder="Result Product Turn" onclick="OnclickProductReturn()" style="background-color:LIGHTBLUE" />
+
+                                                           <button id="Cac_ProductReturn" onclick="Cac_ProductReturn()"> Calculate Product Turns </button>
+
+
+        </div>
+        <div>
+            <label style="font-size:small" id="L_ResultsPDR"></label>
+            <label style="font-size:small" id="L_Results_PDR"></label>
+
+        </div>
+    </div>
+
+    <div data-role="page" id="GMROI_Calculator">
+        <div data-role="header" data-position="fixed">
+            <h1>Retail EZY CALC</h1>
+            <!--<button id="backbutton" onclick="handleBackButton()">Back</button>-->
+
+            <a href="index.html" onclick="self.location=document.referrer">Back</a>
+        </div>
+
+        <div role="main" class="ui-content" id="home-content">
+            <label for="GrossMargin">Gross Margin$</label><input type="number" id="GrossMargin" placeholder="Enter Gross Margin $" onclick="OnClickGrossMargin()" style="background-color:yellow" />
+
+            <label for="AvgInvCost1">Average Inventory Cost $</label><input type="number" id="AvgInvCost1" placeholder="Enter Average Inventory Cost $" onclick="OnClickAvgInvCost1()" style="background-color:yellow" onchange="Cac_GMROI()" />
+
+            <label for="GMROI">GMROI </label><input type="text" id="GMROI" placeholder="Result GMROI" style="background-color:lightblue" />
+
+                                             <button id="Cac_GMROI" onclick="Cac_GMROI()"> Calculate GMROI </button>
+
+        </div>
+        <div>
+            <label style="font-size:small" id="L_ResultsGMROI"></label>
+            <label style="font-size:small" id="L_Results_GMROI"></label>
+
+        </div>
+    </div>
+
+    <div data-role="page" id="Sales_Per_Linear_Foot">
+        <div data-role="header" data-position="fixed">
+            <h1>Retail EZY CALC</h1>
+            <!--<button id="backbutton" onclick="handleBackButton()">Back</button>-->
+
+            <a href="index.html" onclick="self.location=document.referrer">Back</a>
+        </div>
+
+        <div role="main" class="ui-content" id="home-content">
+            <label for="TotalSales">Total Sales $</label><input type="number" id="TotalSales" placeholder="Enter Total Sales $" onclick="OnClickTotalSales()" style="background-color:yellow" />
+
+            <label for="LinearFeet">Linear Feet ft</label><input type="number" id="LinearFeet" placeholder="Enter Linear Feet" onclick="OnClickLinearFeet()" style="background-color:yellow"  onchange="Cac_SalesPerLinearFoot()"/>
+
+            <label for="SalesPerLinearFoot">Sales Per Linear Foot $</label><input type="text" id="SalesPerLinearFoot" placeholder="Result Sales Per Linear Foot" style="background-color:lightblue" />
+
+                                                                           <button id="Cac_SalesPerLinearFoot" onclick="Cac_SalesPerLinearFoot()">Calculate Sales Per Linear Foot</button>
+
+        </div>
+        <div>
+            <label style="font-size:small" id="L_ResultsSPLF"></label>
+            <label style="font-size:small" id="L_Results_SPLF"></label>
+
+        </div>
+    </div>
+</body>
+</html>

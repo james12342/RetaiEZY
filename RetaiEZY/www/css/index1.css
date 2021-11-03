@@ -1,0 +1,32 @@
+body {
+    -webkit-touch-callout: none; /* prevent callout to copy image, etc when tap to hold */
+    -webkit-text-size-adjust: none; /* prevent webkit from resizing text to fit */
+    -webkit-user-select: none; /* prevent copy paste, to allow, change 'none' to 'text' */
+}
+
+
+
+div.box {
+    display: inline-block;
+    float: none;
+    width: 33%;
+    vertical-align: middle;
+}
+
+    div.box.mid {
+        display: inline;
+        text-align: center;
+    }
+
+    div.box.right {
+        display: inline-block;
+        float: none;
+        width: 65%;
+        vertical-align: middle;
+    }
+
+.input-w label, .input-w input {
+    float: none; /* if you had floats before? otherwise inline-block will behave differently */
+    display: inline-block;
+    vertical-align: middle;
+}

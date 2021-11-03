@@ -1,0 +1,40 @@
+body {
+    -webkit-touch-callout: none; /* prevent callout to copy image, etc when tap to hold */
+    -webkit-text-size-adjust: none; /* prevent webkit from resizing text to fit */
+    -webkit-user-select: none; /* prevent copy paste, to allow, change 'none' to 'text' */
+}
+
+
+
+div.box {
+    display: inline-block;
+    float: none;
+    width: 35%;
+    vertical-align: middle;
+}
+
+    div.box.mid {
+        display: inline;
+        text-align: center;
+    }
+
+    div.box.right {
+        display: inline-block;
+        float: none;
+        width: 63%;
+        vertical-align: middle;
+    }
+
+p {
+    font-size :small;
+}
+
+label {
+    font-size: medium;
+}
+select {
+    display: inline-block;
+    float: none;
+    width: 50%;
+    vertical-align: middle;
+}
